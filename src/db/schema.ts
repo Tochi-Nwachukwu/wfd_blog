@@ -15,6 +15,7 @@ export const articles = pgTable("articles", {
   slug: varchar("slug", { length: 255 }),
   description: text("description").notNull(),
   content: text("content").notNull(),
+  imageUrl: varchar("image_url", { length: 255 }),
   authorId: integer("author_id")
     .notNull()
     .references(() => authors.id),
@@ -30,6 +31,7 @@ export const authors = pgTable("authors", {
   id: serial("id").primaryKey(),
   firstName: varchar("first_name", { length: 100 }).notNull(),
   lastName: varchar("last_name", { length: 100 }).notNull(),
+  imageUrl: varchar("image_url", { length: 255 }),
   email: varchar("email", { length: 255 }).unique(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
