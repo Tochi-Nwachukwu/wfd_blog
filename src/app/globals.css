@@ -2,14 +2,14 @@
 /* @plugin "tailwindcss/typography"; */
 
 :root {
-  --background: #ffffff;
+  --background: #FFFFC5;
   --foreground: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-merriweather);
   --font-mono: var(--font-geist-mono);
 }
 

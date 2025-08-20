@@ -1,37 +1,103 @@
+import NewsletterCard from "@/src/components/ui/NewsletterCard";
+import SocialShare from "@/src/components/ui/SocialShare";
+import getHostname from "@/src/components/utils/getHostname";
 import { getArticleById } from "@/src/lib/queries/getArticle";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function BlogDetailsPage({
   params,
 }: {
-  params: { slug: string; id: string };
+  params: { slug: string[] };
 }) {
   const id = Number(params.slug[0].split("--")[1]);
+  const hostname = await getHostname();
 
   if (isNaN(id)) {
     return <div>Invalid article ID</div>;
   }
   const articleDetails = await getArticleById(id);
-  console.log(articleDetails);
 
   if (!articleDetails) {
     return <div>There are no articles</div>;
   }
 
+  // Format the date
+  const formatDate = (dateString: Date) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <Image
-        src={articleDetails.imageUrl ?? "/default.jpg"}
-        alt={articleDetails.title}
-        width={600}
-        height={600}
-        className="w-full  object-cover rounded mb-4"
-      />
-      <h1 className="text-3xl font-bold mb-6">{articleDetails.title}</h1>
-      <div
-        className="prose"
-        dangerouslySetInnerHTML={{ __html: articleDetails.content }}
-      />
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="mb-6">
+        <Link
+          href="/blog"
+          className="bg-black hover:bg-gray-800 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-block"
+        >
+          ← Back to Blog
+        </Link>
+      </div>
+      {/* Header section with title, social buttons, and image */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center border-b py-12 mb-12">
+        <div className="space-y-6">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            {articleDetails.title}
+          </h1>
+          <div>
+            <p className="text-gray-600 ">
+              By {articleDetails.authorFirstName} {articleDetails.authorLastName}
+            </p>
+          </div>
+          <h3 className="text-gray-600 text-sm italic">
+            Published {formatDate(articleDetails.publishDate)}
+          </h3>
+          <SocialShare
+            data={{
+              url: hostname + articleDetails.slug,
+              quote: articleDetails.description,
+              hashtag: articleDetails.title,
+            }}
+          />
+        </div>
+        <div className="relative">
+          <Image
+            src={articleDetails.imageUrl ?? "/default.jpg"}
+            alt={articleDetails.title}
+            width={600}
+            height={400}
+            className="w-full h-92 object-cover rounded shadow-lg"
+          />
+        </div>
+      </div>
+      <div className="mx-auto mb-8">
+        <p className="text-lg text-gray-700 italic leading-relaxed">
+          {articleDetails.description}
+        </p>
+      </div>
+      {/* Responsive layout for content and newsletter */}
+      <div className="mx-auto flex flex-col lg:flex-row gap-12">
+        <div className="flex-1">
+          <div
+            className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-ul:text-gray-700 prose-ol:text-gray-700 prose-li:mb-2"
+            dangerouslySetInnerHTML={{ __html: articleDetails.content }}
+          />
+          {/* NewsletterCard for mobile view */}
+          <div className="block lg:hidden mt-8">
+            <NewsletterCard />
+          </div>
+        </div>
+        {/* Sticky NewsletterCard for desktop view */}
+        <div className="hidden lg:block flex-shrink-0 w-full max-w-sm">
+          <div className="sticky top-8">
+            <NewsletterCard />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

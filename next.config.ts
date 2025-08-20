@@ -6,7 +6,18 @@ const nextConfig: NextConfig = {
     typedEnv: true,
   },
   images: {
-    remotePatterns: [new URL('https://www.howtouseabortionpill.org/**')],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.howtouseabortionpill.org",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 
