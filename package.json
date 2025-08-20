@@ -11,6 +11,7 @@
     "db:migrate": "tsx ./src/db/migrate.ts"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.15.0",
     "@neondatabase/serverless": "^1.0.1",
     "@tailwindcss/typography": "^0.5.16",
     "drizzle-orm": "^0.44.4",
