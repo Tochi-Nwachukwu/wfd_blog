@@ -1,36 +1,59 @@
 import NewsletterCard from "@/src/components/ui/NewsletterCard";
 import SocialShare from "@/src/components/ui/SocialShare";
+import formatDate from "@/src/components/utils/formatDate";
 import getHostname from "@/src/components/utils/getHostname";
 import { getArticleById } from "@/src/lib/queries/getArticle";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function BlogDetailsPage({
-  params,
-}: {
-  params: { slug: string[] };
-}) {
-  const id = Number(params.slug[0].split("--")[1]);
+interface BlogDetailsPageProps {
+  params: Promise<{ slug: string[] }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+interface ArticleDetails {
+  id: number;
+  title: string;
+  description: string | null;
+  content: string;
+  slug?: string;
+  authorFirstName?: string;
+  authorLastName?: string;
+  publishDate?: string | Date;
+  imageUrl?: string;
+  image_url?: string;
+}
+
+export default async function BlogDetailsPage(props: BlogDetailsPageProps) {
+
+  const { params: paramsPromise } = await props;
+
+  const params = await paramsPromise;
+
+  const slugArr = params?.slug ?? [];
+  const id = Number(slugArr?.[0]?.split("--")?.[1]);
   const hostname = await getHostname();
 
   if (isNaN(id)) {
     return <div>Invalid article ID</div>;
   }
+
   const articleDetails = await getArticleById(id);
 
   if (!articleDetails) {
     return <div>There are no articles</div>;
   }
 
-  // Format the date
-  const formatDate = (dateString: Date) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  };
+
+
+  const articleUrl =
+    (hostname?.endsWith("/") ? hostname.slice(0, -1) : hostname) +
+    "/" +
+    (articleDetails.slug ?? `${articleDetails.id}`);
+
+  const imageSrc =
+    // support either naming returned by query
+    articleDetails.imageUrl ?? articleDetails.imageUrl ?? "/default.jpg";
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -42,6 +65,7 @@ export default async function BlogDetailsPage({
           ← Back to Blog
         </Link>
       </div>
+
       {/* Header section with title, social buttons, and image */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center border-b py-12 mb-12">
         <div className="space-y-6">
@@ -50,23 +74,26 @@ export default async function BlogDetailsPage({
           </h1>
           <div>
             <p className="text-gray-600 ">
-              By {articleDetails.authorFirstName} {articleDetails.authorLastName}
+              By {articleDetails.authorFirstName ?? ""}{" "}
+              {articleDetails.authorLastName ?? ""}
             </p>
           </div>
           <h3 className="text-gray-600 text-sm italic">
             Published {formatDate(articleDetails.publishDate)}
           </h3>
+
           <SocialShare
             data={{
-              url: hostname + articleDetails.slug,
-              quote: articleDetails.description,
-              hashtag: articleDetails.title,
+              url: articleUrl,
+              quote: articleDetails.description ?? "",
+              hashtag: articleDetails.title ?? "",
             }}
           />
         </div>
+
         <div className="relative">
           <Image
-            src={articleDetails.imageUrl ?? "/default.jpg"}
+            src={imageSrc}
             alt={articleDetails.title}
             width={600}
             height={400}
@@ -74,11 +101,13 @@ export default async function BlogDetailsPage({
           />
         </div>
       </div>
+
       <div className="mx-auto mb-8">
         <p className="text-lg text-gray-700 italic leading-relaxed">
           {articleDetails.description}
         </p>
       </div>
+
       {/* Responsive layout for content and newsletter */}
       <div className="mx-auto flex flex-col lg:flex-row gap-12">
         <div className="flex-1">
@@ -86,11 +115,12 @@ export default async function BlogDetailsPage({
             className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-ul:text-gray-700 prose-ol:text-gray-700 prose-li:mb-2"
             dangerouslySetInnerHTML={{ __html: articleDetails.content }}
           />
-          {/* NewsletterCard for mobile view */}
+          {/* NewsletterCard portion for the mobile view */}
           <div className="block lg:hidden mt-8">
             <NewsletterCard />
           </div>
         </div>
+
         {/* Sticky NewsletterCard for desktop view */}
         <div className="hidden lg:block flex-shrink-0 w-full max-w-sm">
           <div className="sticky top-8">

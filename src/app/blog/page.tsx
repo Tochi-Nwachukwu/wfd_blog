@@ -8,7 +8,9 @@ export default async function BlogPage() {
   return (
     <div className="px-4 py-8 max-w-7xl mx-auto ">
       <div className="py-40 bg-black mb-32">
-        <h1 className="text-3xl text-white font-bold text-center">Blog Articles</h1>
+        <h1 className="text-3xl text-white font-bold text-center">
+          Blog Articles
+        </h1>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -20,7 +22,7 @@ export default async function BlogPage() {
               title: article.title,
               slug: `${article.slug}--${article.id}`,
               description: article.description,
-              imageUrl: article.imageUrl,
+              imageUrl: article.imageUrl ?? undefined,
               authorName: `${article.authorFirstName} ${article.authorLastName}`,
               publishDate: formatDate(article.publishDate),
             }}
