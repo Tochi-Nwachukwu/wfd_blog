@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   experimental: {
     typedEnv: true,
   },
+  images: {
+    remotePatterns: [new URL('https://www.howtouseabortionpill.org/**')],
+  },
 };
 
 export default nextConfig;
