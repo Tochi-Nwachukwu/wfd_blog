@@ -12,8 +12,8 @@
 
 ## Project Description
 
-A modern blog platform built with **Next.js**, **Drizzle ORM**, and **Postgres**.  
-The project demonstrates full-stack development with server-side rendering, database integration, and responsive UI.
+iDecide Blog is a modern platform built with **Next.js**, **Drizzle ORM**, and **Postgres**.  
+It demonstrates full-stack development with server-side rendering, database integration, and a responsive UI.
 
 **Live Preview:** [wfd-blog.vercel.app](https://wfd-blog.vercel.app)
 
@@ -32,14 +32,30 @@ The project demonstrates full-stack development with server-side rendering, data
 
 ---
 
+## ⚠️ Caution
+
+The database is a cloud database, so you can view the project without much setup via the live link above.  
+There is **no need to reseed the database**.  
+If you want to use a local DB connection, update your environment variables accordingly.
+
+---
+
 ## Getting Started
 
-> ⚠️ **Caution:**  
-> The database is a cloud database, so you can view the project without much setup via the live link above.  
-> There is **no need to reseed the database**.  
-> If you want to use a local DB connection, you can update your environment variables accordingly.
+### 1. Clone the Repository
 
-First, run the development server:
+```bash
+git clone https://github.com/Tochi-Nwachukwu/wfd_blog.git
+cd wfd_blog
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the Development Server
 
 ```bash
 npm run dev
@@ -77,12 +93,12 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about Next.js and related technologies:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Drizzle ORM Documentation](https://orm.drizzle.team/docs) - learn about Drizzle ORM.
-- [Neon Database](https://neon.tech/) - serverless Postgres hosting.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Learn Next.js](https://nextjs.org/learn)
+- [Drizzle ORM Documentation](https://orm.drizzle.team/docs)
+- [Neon Database](https://neon.tech/)
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
@@ -90,6 +106,6 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
