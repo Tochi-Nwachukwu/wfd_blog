@@ -1,4 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# iDecide Blog
+
+**Project Author:** Tochi Nwachukwu
+
+---
+
+## Infrastructure Diagram
+
+![Infrastructure Diagram](https://res.cloudinary.com/dbpoqqa9i/image/upload/fl_preserve_transparency/v1755725208/Screenshot_2025-08-20_at_10.26.28_PM_zcgxzi.jpg?_s=public-apps)
+
+---
+
+## Project Description
+
+A modern blog platform built with **Next.js**, **Drizzle ORM**, and **Postgres**.  
+The project demonstrates full-stack development with server-side rendering, database integration, and responsive UI.
+
+**Live Preview:** [wfd_blog.vercel.com](https://wfd_blog.vercel.com)
+
+---
+
+## Tools & Technologies
+
+| Tool/Tech         | Purpose/Usage                          |
+|-------------------|----------------------------------------|
+| Next.js           | React framework for SSR & SSG          |
+| Drizzle ORM       | Type-safe database ORM                 |
+| Neon Database     | Serverless Postgres hosting            |
+| TypeScript        | Static typing for JavaScript           |
+| Notebook LLM      | AI-powered notebook integration        |
+| Tailwind CSS      | Utility-first CSS framework            |
+
+---
 
 ## Getting Started
 
@@ -14,11 +46,29 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
+
+## Features
+
+- Responsive blog cards and article pages
+- Newsletter signup with sticky positioning on desktop
+- Social sharing (Facebook, X, LinkedIn, WhatsApp)
+- Author attribution and publish date
+- Markdown and HTML content rendering
+- Optimized font loading with Google Fonts
+- Type-safe database queries with Drizzle ORM
+
+---
+
+## Font
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Merriweather](https://fonts.google.com/specimen/Merriweather) for body text and [DM Serif Display](https://fonts.google.com/specimen/DM+Serif+Display) for headings.
+
+---
 
 ## Learn More
 
@@ -26,8 +76,12 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Drizzle ORM Documentation](https://orm.drizzle.team/docs) - learn about Drizzle ORM.
+- [Neon Database](https://neon.tech/) - serverless Postgres hosting.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+---
 
 ## Deploy on Vercel
 
