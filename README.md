@@ -34,6 +34,11 @@ The project demonstrates full-stack development with server-side rendering, data
 
 ## Getting Started
 
+> ⚠️ **Caution:**  
+> The database is a cloud database, so you can view the project without much setup via the live link above.  
+> There is **no need to reseed the database**.  
+> If you want to use a local DB connection, you can update your environment variables accordingly.
+
 First, run the development server:
 
 ```bash
