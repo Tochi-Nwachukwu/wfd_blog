@@ -15,7 +15,7 @@
 A modern blog platform built with **Next.js**, **Drizzle ORM**, and **Postgres**.  
 The project demonstrates full-stack development with server-side rendering, database integration, and responsive UI.
 
-**Live Preview:** [wfd_blog.vercel.com](https://wfd_blog.vercel.com)
+**Live Preview:** [wfd-blog.vercel.com](https://wfd-blog.vercel.com)
 
 ---
 
