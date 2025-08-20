@@ -1,11 +1,11 @@
 import { db } from "@/src/db";
-import { articles } from "@/src/db/schema";
-import { authors } from "@/src/db/schema";
-import { eq } from "drizzle-orm";
+import { articles, authors } from "@/src/db/schema";
+import { and, eq } from "drizzle-orm";
 
 export async function getArticleById(articleId: number) {
   if (!Number.isInteger(articleId)) return null;
-  const article = await db
+
+  const rows = await db
     .select({
       id: articles.id,
       title: articles.title,
@@ -13,6 +13,7 @@ export async function getArticleById(articleId: number) {
       description: articles.description,
       content: articles.content,
       imageUrl: articles.imageUrl,
+      podcastUrl: articles.podcastUrl,
       publishDate: articles.publishDate,
       isPublished: articles.isPublished,
       authorId: articles.authorId,
@@ -21,8 +22,13 @@ export async function getArticleById(articleId: number) {
     })
     .from(articles)
     .leftJoin(authors, eq(articles.authorId, authors.id))
-    .where(eq(articles.id, articleId))
+    .where(
+      and(
+        eq(articles.id, articleId),
+        eq(articles.isPublished, true)
+      )
+    )
     .limit(1);
 
-  return article[0] || null;
+  return rows[0] ?? null;
 }

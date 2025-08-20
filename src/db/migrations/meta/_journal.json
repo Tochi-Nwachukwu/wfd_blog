@@ -15,6 +15,13 @@
       "when": 1755637424118,
       "tag": "0001_fixed_manta",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1755733194297,
+      "tag": "0002_unique_scourge",
+      "breakpoints": true
     }
   ]
 }

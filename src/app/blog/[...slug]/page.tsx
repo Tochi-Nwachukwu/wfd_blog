@@ -1,3 +1,4 @@
+import AudioVisualizer from "@/src/components/ui/AudioVisualizer";
 import NewsletterCard from "@/src/components/ui/NewsletterCard";
 import SocialShare from "@/src/components/ui/SocialShare";
 import formatDate from "@/src/components/utils/formatDate";
@@ -18,6 +19,7 @@ interface ArticleDetails {
   content: string;
   slug?: string;
   authorFirstName?: string;
+  podcastUrl?: string;
   authorLastName?: string;
   publishDate?: string | Date;
   imageUrl?: string;
@@ -25,7 +27,6 @@ interface ArticleDetails {
 }
 
 export default async function BlogDetailsPage(props: BlogDetailsPageProps) {
-
   const { params: paramsPromise } = await props;
 
   const params = await paramsPromise;
@@ -43,8 +44,6 @@ export default async function BlogDetailsPage(props: BlogDetailsPageProps) {
   if (!articleDetails) {
     return <div>There are no articles</div>;
   }
-
-
 
   const articleUrl =
     (hostname?.endsWith("/") ? hostname.slice(0, -1) : hostname) +
@@ -72,12 +71,17 @@ export default async function BlogDetailsPage(props: BlogDetailsPageProps) {
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
             {articleDetails.title}
           </h1>
+
           <div>
             <p className="text-gray-600 ">
               By {articleDetails.authorFirstName ?? ""}{" "}
               {articleDetails.authorLastName ?? ""}
             </p>
           </div>
+
+          <AudioVisualizer
+            podcastUrl={articleDetails.podcastUrl ?? undefined}
+          />
           <h3 className="text-gray-600 text-sm italic">
             Published {formatDate(articleDetails.publishDate)}
           </h3>

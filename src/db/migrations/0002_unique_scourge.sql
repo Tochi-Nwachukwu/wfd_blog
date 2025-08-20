@@ -1,0 +1,1 @@
+ALTER TABLE "articles" ADD COLUMN "podcast_url" varchar(255);
