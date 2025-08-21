@@ -1,6 +1,7 @@
 import AudioVisualizer from "@/src/components/ui/AudioVisualizer";
 import NewsletterCard from "@/src/components/ui/NewsletterCard";
 import SocialShare from "@/src/components/ui/SocialShare";
+import buildArticleUrl from "@/src/components/utils/buildArticleUrl";
 import formatDate from "@/src/components/utils/formatDate";
 import getHostname from "@/src/components/utils/getHostname";
 import { getArticleById } from "@/src/lib/queries/getArticle";
@@ -45,10 +46,7 @@ export default async function BlogDetailsPage(props: BlogDetailsPageProps) {
     return <div>There are no articles</div>;
   }
 
-  const articleUrl =
-    (hostname?.endsWith("/") ? hostname.slice(0, -1) : hostname) +
-    "/" +
-    (articleDetails.slug ?? `${articleDetails.id}`);
+  const articleUrl = buildArticleUrl(hostname, articleDetails.slug, articleDetails.id);
 
   const imageSrc =
     // support either naming returned by query
